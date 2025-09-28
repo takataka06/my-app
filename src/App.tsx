@@ -43,14 +43,25 @@ export default function App() {
     setTodoLists(newTodoLists);
   })
   
+  const onClickDelete = ((id: number) => {
+    const newTodoLists = TodoLists.filter(todo => todo.id !== id);
+    setTodoLists(newTodoLists);
+  })
+
+  const onClickBack = ((id: number) => {
+    const newTodoLists = TodoLists.map(todo => 
+      todo.id === id ? {...todo, completed: false} : todo
+  )
+    setTodoLists(newTodoLists);
+  })
   return  (
     <>
       <p className='text-center p-5'>Todoリスト</p>
       <InputTodos todoText={todoText} onChange={onChangeTodoText} onClickTodoText={onClickTodoText}/>
       <div className='flex justify-around bg-amber-600 p-5 rounded-lg m-5 w-1/2 mx-auto'>
-      <IncompleteTodos TodoLists={TodoLists} onClick={onClickComplete}/>
+      <IncompleteTodos TodoLists={TodoLists} onClick={onClickComplete} onClickDelete={onClickDelete}/>
 
-      <CompleteTodos TodoLists={TodoLists} />
+      <CompleteTodos TodoLists={TodoLists} onClickBack={onClickBack} onClickDelete={onClickDelete}/>
       </div>
     </>
   )

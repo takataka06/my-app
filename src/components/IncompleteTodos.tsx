@@ -3,10 +3,11 @@ import type { Todo } from '../App.tsx';
 type Props = {
   TodoLists: Todo[];
   onClick: (id: number) => void;
+  onClickDelete: (id: number) => void;
 }
 
 
-export default function IncompleteTodos({TodoLists,onClick}: Props) {
+export default function IncompleteTodos({TodoLists,onClick,onClickDelete}: Props) {
   return (
     <div>
       <h2 className='font-bold text-lg'>未完了</h2>
@@ -17,6 +18,9 @@ export default function IncompleteTodos({TodoLists,onClick}: Props) {
             <button className="block bg-white text-amber-600 rounded-lg p-1 mt-3 ml-4 active:translate-y-1"
             onClick={() => onClick(todo.id)}
             >完了</button>
+            <button className='block bg-white text-red-600 rounded-lg p-1 mt-3 ml-2 active:translate-y-1'
+            onClick={() => onClickDelete(todo.id)}
+            >削除</button>
             </li>
             
           ))}
